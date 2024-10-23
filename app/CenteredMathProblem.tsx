@@ -13,7 +13,7 @@ const CenteredMathProblem: React.FC = () => {
 
   const generateProblem = () => {
     const single = Math.floor(Math.random() * 10);
-    const double = Math.floor(Math.random() * 90) + 10;
+    const double = Math.floor(Math.random() * 20) + 10;
 
     setSingleDigit(single);
     setDoubleDigit(double);
@@ -24,11 +24,11 @@ const CenteredMathProblem: React.FC = () => {
     let incorrect2 = correctAnswer;
 
     while (incorrect1 === correctAnswer) {
-      incorrect1 = Math.floor(Math.random() * 100);
+      incorrect1 = Math.floor(Math.random() * 20);
     }
 
     while (incorrect2 === correctAnswer || incorrect2 === incorrect1) {
-      incorrect2 = Math.floor(Math.random() * 100);
+      incorrect2 = Math.floor(Math.random() * 20);
     }
 
     const shuffledAnswers = [correctAnswer, incorrect1, incorrect2].sort(() => Math.random() - 0.5);
@@ -71,7 +71,7 @@ const CenteredMathProblem: React.FC = () => {
       setIsCorrect(true);
       setCorrectGuesses((prev) => {
         const updatedCorrectGuesses = prev + 1;
-        if (updatedCorrectGuesses % 2 == 0)  {
+        if (updatedCorrectGuesses % 10 == 0)  {
           triggerConfetti();
           setTimeout(() => {
           },2000);
