@@ -1,8 +1,13 @@
 import type { Config } from "tailwindcss";
 
 const config: Config = {
+  purge: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
+
   content: [
-    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./math-problem-add/**/*.{js,ts,jsx,tsx,mdx}",
+    "./math-problem-sub/**/*.{js,ts,jsx,tsx,mdx}",
+    "./app/page.tsx",
+    "./page.tsx",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],

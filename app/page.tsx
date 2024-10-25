@@ -1,15 +1,13 @@
-// page.tsx
 import React from 'react';
-import CenteredMathProblem from "./CenteredMathProblem";
+import HomePageComponent from "./HomePageComponent";
 
-const Page: React.FC = () => {
+
+const HomePage: React.FC = () => {
     return (
         <div>
-            <CenteredMathProblem />
+            <HomePageComponent />
         </div>
     );
-
 };
 
-export default Page;
-
+export default HomePage;
