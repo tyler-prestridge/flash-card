@@ -14,6 +14,11 @@ const HomePageComponent: React.FC = () => {
                 <a href="/math-problem-sub" className="p-4 bg-green-500 text-white text-center rounded">
                     Subtraction Problems
                 </a>
+                <br/>
+                <br/>
+                <a href="/site-words" className="p-4 bg-green-500 text-white text-center rounded">
+                    Site Words
+                </a>
             </div>
         </div>
     );
