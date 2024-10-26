@@ -4,9 +4,6 @@ import React from 'react';
 const BackToHomeButton: React.FC = () => {
     return (
         <div style={styles.container}>
-            <a href="/" >
-                Back
-            </a>
             <br/>
             <br/>
         </div>
