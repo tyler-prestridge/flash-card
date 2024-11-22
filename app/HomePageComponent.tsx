@@ -11,13 +11,23 @@ const HomePageComponent: React.FC = () => {
                 </a>
                 <br/>
                 <br/>
+                <a href="/math-problem-middle-add" className="p-4 bg-blue-500 text-white text-center rounded">
+                    Addition Middle Problems
+                </a>
+                <br/>
+                <br/>
                 <a href="/math-problem-sub" className="p-4 bg-green-500 text-white text-center rounded">
                     Subtraction Problems
                 </a>
                 <br/>
                 <br/>
-                <a href="/site-words" className="p-4 bg-green-500 text-white text-center rounded">
-                    Site Words
+                <a href="/math-problem-middle-sub" className="p-4 bg-green-500 text-white text-center rounded">
+                    Subtraction Middle Problems
+                </a>
+                <br/>
+                <br/>
+                <a href="/sight-words" className="p-4 bg-green-500 text-white text-center rounded">
+                    Sight Words
                 </a>
             </div>
         </div>

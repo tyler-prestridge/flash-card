@@ -4,8 +4,9 @@ import React, { useState, useEffect, useCallback } from 'react';
 import confetti from 'canvas-confetti';
 
 const CenteredMathProblem: React.FC = () => {
-  const [singleDigit, setSingleDigit] = useState<number>(0);
-  const [doubleDigit, setDoubleDigit] = useState<number>(0);
+  const [shownNumber, setShownNumber] = useState<number>(0);
+  const [hiddenNumber, setHiddenNumber] = useState<number>(0);
+  const [shownAnswer, setShownAnswer] = useState<number>(0);
   const [answers, setAnswers] = useState<number[]>([]);
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
   const [correctGuesses, setCorrectGuesses] = useState<number>(0);
@@ -13,39 +14,42 @@ const CenteredMathProblem: React.FC = () => {
 
   const generateProblem = () => {
     const single = Math.floor(Math.random() * 10);
-    const double = Math.floor(Math.random() * 20) + 10;
+    const double = Math.floor(Math.random() * 20);
+    const hiddenSingle = Math.floor(Math.random() * 10);
 
-    setSingleDigit(single);
-    setDoubleDigit(double);
+    setShownNumber(single + double);
+    const hiddenNumber = hiddenSingle;
+    setHiddenNumber(hiddenNumber);
 
-    const correctAnswer = single + double;
-
+    const correctAnswer = (single + double) + (hiddenSingle);
+    setShownAnswer(correctAnswer);
     let incorrect1;
     let incorrect2;
     const path = Math.floor((Math.random() * 10)) % 3;
     switch (path) {
       case 0:
-        incorrect1 = doubleUp(1, correctAnswer);
-        incorrect2 = doubleUp(2, correctAnswer);
+        incorrect1 = doubleUp(1, hiddenNumber);
+        incorrect2 = doubleUp(2, hiddenNumber);
         break;
       case 1:
-        incorrect1 = doubleDown(1, correctAnswer);
-        incorrect2 = doubleDown(2, correctAnswer);
+        incorrect1 = doubleDown(1, hiddenNumber);
+        incorrect2 = doubleDown(2, hiddenNumber);
         break;
       default:
-        incorrect1 = doubleDown(1, correctAnswer);
-        incorrect2 = doubleDown(1, correctAnswer);
+        incorrect1 = doubleDown(1, hiddenNumber);
+        incorrect2 = doubleDown(1, hiddenNumber);
         break;
+
     }
-    while (incorrect1 === correctAnswer) {
+    while (incorrect1 === hiddenNumber) {
       incorrect1 = Math.floor(Math.random() * 20);
     }
 
-    while (incorrect2 === correctAnswer || incorrect2 === incorrect1) {
+    while (incorrect2 === hiddenNumber || incorrect2 === incorrect1) {
       incorrect2 = Math.floor(Math.random() * 20);
     }
 
-    const shuffledAnswers = [correctAnswer, incorrect1, incorrect2].sort(() => Math.random() - 0.5);
+    const shuffledAnswers = [hiddenNumber, incorrect1, incorrect2].sort(() => Math.random() - 0.5);
     setAnswers(shuffledAnswers);
     setIsCorrect(null);
   };
@@ -92,7 +96,7 @@ const CenteredMathProblem: React.FC = () => {
   }, []);
 
   const handleButtonClick = (answer: number) => {
-    if (answer === singleDigit + doubleDigit) {
+    if (answer === hiddenNumber) {
       setIsCorrect(true);
       setCorrectGuesses((prev) => {
         const updatedCorrectGuesses = prev + 1;
@@ -117,7 +121,7 @@ const CenteredMathProblem: React.FC = () => {
           <div>Incorrect Guesses: {incorrectGuesses}</div>
         </div>
         <div style={styles.problem}>
-          {singleDigit} + {doubleDigit} = ?
+          {shownNumber} + ? = {shownAnswer}
         </div>
         <div style={styles.answers}>
           {answers.map((answer) => (

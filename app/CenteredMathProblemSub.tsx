@@ -20,9 +20,23 @@ const CenteredMathProblemSub: React.FC = () => {
 
     const correctAnswer = double - single;
 
-    let incorrect1 = correctAnswer;
-    let incorrect2 = correctAnswer;
-
+    let incorrect1;
+    let incorrect2;
+    const path = Math.floor((Math.random() * 10)) % 3;
+    switch (path) {
+      case 0:
+        incorrect1 = doubleUp(1, correctAnswer);
+        incorrect2 = doubleUp(2, correctAnswer);
+        break;
+      case 1:
+        incorrect1 = doubleDown(1, correctAnswer);
+        incorrect2 = doubleDown(2, correctAnswer);
+        break;
+      default:
+        incorrect1 = doubleDown(1, correctAnswer);
+        incorrect2 = doubleDown(1, correctAnswer);
+        break;
+    }
     while (incorrect1 === correctAnswer) {
       incorrect1 = Math.floor(Math.random() * 20);
     }
@@ -35,6 +49,18 @@ const CenteredMathProblemSub: React.FC = () => {
     setAnswers(shuffledAnswers);
     setIsCorrect(null);
   };
+
+  function doubleUp( x: number, answer: number){
+    return answer + x;
+  }
+
+  function doubleDown( x: number, answer: number){
+    if (answer > 0){
+      return answer - x;
+    }
+    return 0;
+  }
+
 
   useEffect(() => {
     generateProblem();
